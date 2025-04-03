@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://userRegistrationView.caption">
+    <actions>
+        <action id="register" caption="Register"/>
+    </actions>
+    <layout  stylename="jmix-login-main-layout">
+        <vbox id="registrationFormWrapper" width="40em" align="MIDDLE_CENTER" spacing="true"
+              stylename="well">
+            <label value="User Registration"
+                   align="MIDDLE_CENTER"
+                   stylename="jmix-login-caption"/>
+            <vbox spacing="true"
+                   align="MIDDLE_CENTER" width="30em" margin="true" >
+                    <form id="registerForm">
+                        <textField id="emailField" caption="email" required="true" datatype="string" >
+                            <validators>
+                                <email/>
+                            </validators>
+                        </textField>
+                        <textField id="firstNameField" caption="First Name" required="true" datatype="string"/>
+                        <textField id="lastNameField" caption="Last Name" required="true" datatype="string"/>
+                    </form>
+            </vbox>
+
+            <vbox margin="true">
+                <button id="registerBtn" action="register" stylename="primary" width="100%" icon="CHECK" />
+            </vbox>
+
+        </vbox>
+    </layout>
+</window>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://examEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="examDc"
+                  class="com.company.classmanagment.entity.Exam">
+            <fetchPlan extends="_base">
+                <property name="subject" fetchPlan="_instance_name">
+                </property>
+                <property name="user" fetchPlan="_instance_name">
+                    <property name="semester"/>
+                </property>
+            </fetchPlan>
+            <loader/>
+            <collection id="userDc" property="user"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true" expand="editActions">
+        <form id="form" dataContainer="examDc">
+            <column width="350px">
+                <textField id="nameField" property="name"/>
+                <entityPicker id="subjectField" property="subject">
+                    <actions>
+                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityClear" type="entity_clear"/>
+                    </actions>
+                </entityPicker>
+                <dateField id="dateField" property="date"/>
+                <textField id="placeField" property="place"/>
+                <textArea id="notesField" property="notes" rows="5"/>
+                <textField id="totalScoreField" property="totalScore"/>
+                <comboBox id="gradeField" property="grade" required="true"/>
+            </column>
+        </form>
+        <groupBox id="userBox" caption="msg://com.company.classmanagment.entity/Exam.user">
+            <table id="userTable" dataContainer="userDc" width="100%" height="100%">
+                <actions>
+                    <action id="addAll" caption="Add All Subject Students" icon="GROUP"/>
+                    <action id="add" type="add"/>
+                    <action id="exclude" type="exclude"/>
+                </actions>
+                <columns>
+                    <column id="username"/>
+                    <column id="firstName"/>
+                    <column id="lastName"/>
+                    <column id="semester"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="userTable.addAll"/>
+                    <button action="userTable.add"/>
+                    <button action="userTable.exclude"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        xmlns:c="http://jmix.io/schema/ui/jpql-condition"
+        caption="msg://subjectBrowse.caption"
+        focusComponent="subjectsTable">
+    <data readOnly="true">
+        <collection id="subjectsDc"
+                    class="com.company.classmanagment.entity.Subject">
+            <fetchPlan extends="_base"/>
+            <loader id="subjectsDl">
+                <query>
+                    <![CDATA[select e from Subject e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="lookupSelectAction"
+                caption="msg:///actions.Select"
+                icon="LOOKUP_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="lookupCancelAction"
+                caption="msg:///actions.Cancel"
+                icon="LOOKUP_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="subjectsTable" spacing="true">
+        <filter id="filter"
+                dataLoader="subjectsDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="subjectsTable"
+                    width="100%"
+                    dataContainer="subjectsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="subjectScore"/>
+                <column id="lessonsNum"/>
+                <column id="semester"/>
+                <column id="materials"/>
+            </columns>
+            <simplePagination/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="subjectsTable.create"/>
+                <button id="editBtn" action="subjectsTable.edit"/>
+                <button id="removeBtn" action="subjectsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

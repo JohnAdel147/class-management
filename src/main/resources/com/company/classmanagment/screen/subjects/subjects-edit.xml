@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://subjectsEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="subjectsDc"
+                  class="com.company.classmanagment.entity.Subject">
+            <fetchPlan extends="_base">
+                <property name="users" fetchPlan="_instance_name">
+                    <property name="semester"/>
+                </property>
+            </fetchPlan>
+            <loader/>
+            <collection id="usersDc" property="users"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true" expand="editActions">
+        <form id="form" dataContainer="subjectsDc">
+            <column width="350px">
+                <textField id="nameField" property="name"/>
+                <textField id="lessonsNumField" property="lessonsNum"/>
+                <comboBox id="semesterField" property="semester" required="true"/>
+                <textField id="subjectScoreField" property="subjectScore"/>
+                <textField id="materialsField" property="materials"/>
+            </column>
+        </form>
+        <groupBox id="usersBox" caption="msg://com.company.classmanagment.entity/Subject.users">
+            <table id="usersTable" dataContainer="usersDc" width="100%" height="100%">
+                <actions>
+                    <action id="add" type="add"/>
+                    <action id="exclude" type="exclude"/>
+                    <action id="addAll" caption="Add All Semester Students" icon="GROUP"/>
+                    <action id="refresh" type="refresh"/>
+                </actions>
+                <columns>
+                    <column id="firstName"/>
+                    <column id="lastName"/>
+                    <column id="username"/>
+                    <column id="semester"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="usersTable.addAll"/>
+                    <button action="usersTable.add"/>
+                    <button action="usersTable.exclude"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

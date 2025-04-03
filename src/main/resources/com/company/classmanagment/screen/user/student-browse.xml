@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        xmlns:c="http://jmix.io/schema/ui/jpql-condition"
+        caption="msg://studentBrowse.caption"
+        focusComponent="usersTable">
+    <data readOnly="true">
+        <collection id="usersDc"
+                    class="com.company.classmanagment.entity.User">
+            <fetchPlan extends="_base"/>
+            <loader id="usersDl">
+                <query>
+                    <![CDATA[select e from User e where e.student = true]]>
+                </query>
+            </loader>
+        </collection>
+        <collection id="usersG1Dc"
+                    class="com.company.classmanagment.entity.User">
+            <fetchPlan extends="_base"/>
+            <loader id="G1Dl">
+                <query>
+                    <![CDATA[select e from User e where e.student = true and e.semester =10]]>
+                </query>
+            </loader>
+        </collection>
+        <collection id="usersG2Dc"
+                    class="com.company.classmanagment.entity.User">
+            <fetchPlan extends="_base"/>
+            <loader id="G2Dl">
+                <query>
+                    <![CDATA[select e from User e where e.student = true and e.semester =20]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="lookupSelectAction"
+                caption="msg:///actions.Select"
+                icon="LOOKUP_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="lookupCancelAction"
+                caption="msg:///actions.Cancel"
+                icon="LOOKUP_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="studentTables" spacing="true">
+
+        <tabSheet id="studentTables" stylename="framed"  >
+            <tab id="All" expand="usersTable">
+                <filter id="filter"
+                        dataLoader="usersDl"
+                        css="margin-top:5px;margin-bottom:10px">
+                    <properties include=".*"/>
+                </filter>
+                <groupTable id="usersTable"
+                            width="100%"
+                            dataContainer="usersDc">
+                    <actions>
+                        <action id="refresh" type="refresh"/>
+                    </actions>
+                    <columns>
+                        <column id="firstName"/>
+                        <column id="lastName"/>
+                        <column id="semester"/>
+                        <column id="active"/>
+                        <column id="studentAttendanceScore"/>
+                        <column id="totalGradeScore"/>
+                        <column id="studentExamsScore"/>
+                        <column id="passedExams"/>
+                        <column id="username"/>
+                        <column id="email"/>
+                    </columns>
+                    <simplePagination/>
+                    <buttonsPanel id="buttonsPanel"
+                                  alwaysVisible="true">
+                        <button id="refreshBtn" action="usersTable.refresh"/>
+                    </buttonsPanel>
+                </groupTable>
+                <hbox id="lookupActions" spacing="true" visible="false">
+                    <button action="lookupSelectAction"/>
+                    <button action="lookupCancelAction"/>
+                </hbox>
+            </tab>
+            <tab id="Grade1" caption="Grade1" expand="G1Table">
+                <filter id="g1Filter"
+                        dataLoader="G1Dl"
+                        css="margin-top:5px;margin-bottom:10px">
+                    <properties include=".*"/>
+                </filter>
+                <groupTable id="G1Table"
+                            width="100%"
+                            dataContainer="usersG1Dc">
+                    <actions>
+                        <action id="refresh" type="refresh"/>
+                    </actions>
+                    <columns>
+                        <column id="firstName"/>
+                        <column id="lastName"/>
+                        <column id="semester"/>
+                        <column id="active"/>
+                        <column id="studentAttendanceScore"/>
+                        <column id="totalGradeScore"/>
+                        <column id="studentExamsScore"/>
+                        <column id="passedExams"/>
+                        <column id="username"/>
+                        <column id="email"/>
+                    </columns>
+                    <simplePagination/>
+                    <buttonsPanel id="g1ButtonsPanel"
+                                  alwaysVisible="true">
+                        <button id="g1RefreshBtn" action="usersTable.refresh"/>
+                    </buttonsPanel>
+                </groupTable>
+                <hbox id="g1LookupActions" spacing="true" visible="false">
+                    <button action="lookupSelectAction"/>
+                    <button action="lookupCancelAction"/>
+                </hbox>
+            </tab>
+            <tab id="Grade2" caption="Grade2" expand="G2Table">
+                <filter id="g2Filter"
+                        dataLoader="G2Dl"
+                        css="margin-top:5px;margin-bottom:10px">
+                    <properties include=".*"/>
+                </filter>
+                <groupTable id="G2Table"
+                            width="100%"
+                            dataContainer="usersG2Dc">
+                    <actions>
+                        <action id="refresh" type="refresh"/>
+                    </actions>
+                    <columns>
+                        <column id="firstName"/>
+                        <column id="lastName"/>
+                        <column id="semester"/>
+                        <column id="active"/>
+                        <column id="studentAttendanceScore"/>
+                        <column id="totalGradeScore"/>
+                        <column id="studentExamsScore"/>
+                        <column id="passedExams"/>
+                        <column id="username"/>
+                        <column id="email"/>
+                    </columns>
+                    <simplePagination/>
+                    <buttonsPanel id="g2ButtonsPanel"
+                                  alwaysVisible="true">
+                        <button id="g2RefreshBtn" action="usersTable.refresh"/>
+                    </buttonsPanel>
+                </groupTable>
+                <hbox id="g2LookupActions" spacing="true" visible="false">
+                    <button action="lookupSelectAction"/>
+                    <button action="lookupCancelAction"/>
+                </hbox>
+            </tab>
+        </tabSheet>
+
+    </layout>
+</window>

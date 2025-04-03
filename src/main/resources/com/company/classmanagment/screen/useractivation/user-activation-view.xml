@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://userActivationView.caption">
+    <layout>
+        <vbox  id="registrationFormWrapper" width="40em"
+               align="MIDDLE_CENTER" margin="true" spacing="true" stylename="dropzone-container">
+            <label value="User Activation" align="MIDDLE_CENTER" width="auto" stylename="h1"/>
+            <label id="notFoundHeader" value="cant find user" align="MIDDLE_CENTER" width="auto" stylename="h2" />
+            <label id="welcomeHeader" align="MIDDLE_CENTER" width="auto" stylename="h2"/>
+            <vbox id="activationForm" spacing="true" margin="true" >
+                <form id="form" align="MIDDLE_CENTER" >
+                    <passwordField id="passwordField" caption="Password" required="true" align="MIDDLE_CENTER">
+                        <validators>
+                            <size min="4" message="At least 4 characters"/>
+                            <regexp regexp="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$" message="passsword must contain characters and digits"/>
+                        </validators>
+                    </passwordField>
+                    <passwordField id="confirmPasswordField" caption="Confirm Password" required="true" align="MIDDLE_CENTER"/>
+                    <comboBox id="gradeField" optionsEnum="com.company.classmanagment.entity.Grade"
+                              caption="Grade" align="MIDDLE_CENTER"/>
+                </form>
+            </vbox>
+
+            <button id="activeBtn" caption="activate" stylename="primary" width="100%"/>
+            <button id="returnToLoginBtn" caption="Back To Login" primary="true" width="100%"/>
+        </vbox>
+    </layout>
+</window>

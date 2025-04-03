@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://jmix.io/schema/ui/menu">
+
+    <menu id="application" caption="msg://com.company.classmanagment/menu.application" insertBefore="administration">
+        <item screen="User.browse" caption="msg://com.company.classmanagment.screen.user/UserBrowse.caption"/>
+        <item screen="Student.browse" caption="msg://com.company.classmanagment.screen.user/studentBrowse.menu"/>
+        <item screen="Classes.browse" caption="classes"/>
+        <item screen="Training.browse" caption="msg://com.company.classmanagment.screen.training/trainingBrowse.menu"/>
+        <item screen="Subject.browse" caption="msg://com.company.classmanagment.screen.subject/subjectBrowse.menu"/>
+        <item screen="Exam.browse" caption="msg://com.company.classmanagment.screen.exam/examBrowse.menu"/>
+        <item screen="ExamScore.browse" caption="msg://com.company.classmanagment.screen.examscore/examScoreBrowse.menu"/>
+        <item screen="WorkingDays.browse"
+              caption="msg://com.company.classmanagment.screen.workingdays/workingDaysBrowse.menu"/>
+        <item screen="Attendance.browse"
+              caption="msg://com.company.classmanagment.screen.attendance/attendanceBrowse.menu"/>
+        <item screen="themeSettingsScreen" caption="msg://io.jmix.ui.app.themesettings/themeSettings.caption"/>
+        <item screen="GraduationProject.browse"
+              caption="msg://com.company.classmanagment.screen.graduationproject/graduationProjectBrowse.menu"/>
+        <item screen="GraduationProjectRequest.browse"
+              caption="msg://com.company.classmanagment.screen.graduationprojectrequest/graduationProjectRequestBrowse.menu"/>
+
+        <!--        <item screen="UserRegistrationView"-->
+<!--              caption="msg://com.company.classmanagment.screen.register.userregistration/userRegistrationView.caption"/>-->
+<!--        <item screen="UserActivationView"-->
+<!--              caption="msg://com.company.classmanagment.screen.useractivation/userActivationView.caption"/>-->
+
+    </menu>
+
+</menu-config>

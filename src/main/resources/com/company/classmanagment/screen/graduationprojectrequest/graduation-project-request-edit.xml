@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://graduationProjectRequestEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="graduationProjectRequestDc"
+                  class="com.company.classmanagment.entity.GraduationProjectRequest">
+            <fetchPlan extends="_base">
+                <property name="student" fetchPlan="_instance_name"/>
+                <property name="firstProject" fetchPlan="_base"/>
+                <property name="secondProject" fetchPlan="_base"/>
+                <property name="thirdProject" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader/>
+        </instance>
+
+
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+        <action id="approve"
+                caption="msg://action.approve"
+                icon="EDITOR_OK"/>
+        <action id="reject"
+                caption="msg://action.reject"
+                icon="CLOSE"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true" >
+        <form id="form" dataContainer="graduationProjectRequestDc">
+            <column width="350px">
+                <entityPicker id="studentField" property="student" required="true">
+                    <actions>
+                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityClear" type="entity_clear"/>
+                    </actions>
+                </entityPicker>
+                <entityPicker id="firstProjectField" property="firstProject" required="true">
+                    <actions>
+                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityClear" type="entity_clear"/>
+                    </actions>
+                </entityPicker>
+                <entityPicker id="secondProjectField" property="secondProject" required="true">
+                    <actions>
+                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityClear" type="entity_clear"/>
+                    </actions>
+                </entityPicker>
+                <entityPicker id="thirdProjectField" property="thirdProject" required="true">
+                    <actions>
+                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityClear" type="entity_clear"/>
+                    </actions>
+                </entityPicker>
+                <textArea id="notesField" property="notes" rows="5"/>
+                <comboBox id="acceptedProject" property="acceptedProject" caption="Accepted Project"/>
+
+            </column>
+        </form>
+        <vbox id="acceptForm" align="BOTTOM_LEFT" spacing="true" margin="true">
+            <hbox id="editActions" spacing="true">
+                <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+                <button id="closeBtn" action="windowClose"/>
+                <button id="approveBtn" action="approve" stylename="friendly"/>
+                <button id="rejectBtn" action="reject" stylename="danger"/>
+            </hbox>
+        </vbox>
+
+    </layout>
+</window>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        xmlns:c="http://jmix.io/schema/ui/jpql-condition"
+        caption="msg://graduationProjectRequestBrowse.caption"
+        focusComponent="graduationProjectRequestsTable">
+    <data readOnly="true">
+        <collection id="graduationProjectRequestsDc"
+                    class="com.company.classmanagment.entity.GraduationProjectRequest">
+            <fetchPlan extends="_base">
+                <property name="student" fetchPlan="_instance_name"/>
+                <property name="firstProject" fetchPlan="_base"/>
+                <property name="secondProject" fetchPlan="_base"/>
+                <property name="thirdProject" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="graduationProjectRequestsDl">
+                <query>
+                    <![CDATA[select e from GraduationProjectRequest e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="lookupSelectAction"
+                caption="msg:///actions.Select"
+                icon="LOOKUP_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="lookupCancelAction"
+                caption="msg:///actions.Cancel"
+                icon="LOOKUP_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="graduationProjectRequestsTable" spacing="true">
+        <filter id="filter"
+                dataLoader="graduationProjectRequestsDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="graduationProjectRequestsTable"
+                    width="100%"
+                    dataContainer="graduationProjectRequestsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="student"/>
+                <column id="firstProject"/>
+                <column id="secondProject"/>
+                <column id="thirdProject"/>
+                <column id="notes"/>
+                <column id="status"/>
+                <column id="acceptedProject"/>
+            </columns>
+            <simplePagination/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="graduationProjectRequestsTable.create"/>
+                <button id="editBtn" action="graduationProjectRequestsTable.edit"/>
+                <button id="removeBtn" action="graduationProjectRequestsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

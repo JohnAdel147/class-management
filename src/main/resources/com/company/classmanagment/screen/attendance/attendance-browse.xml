@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        xmlns:c="http://jmix.io/schema/ui/jpql-condition"
+        caption="msg://attendanceBrowse.caption"
+        focusComponent="attendancesTable">
+    <data readOnly="true">
+        <collection id="attendancesDc"
+                    class="com.company.classmanagment.entity.Attendance">
+            <fetchPlan extends="_base">
+                <property name="user" fetchPlan="_instance_name"/>
+                <property name="event" fetchPlan="_instance_name">
+                    <property name="startDate"/>
+                </property>
+            </fetchPlan>
+            <loader id="attendancesDl">
+                <query>
+                    <![CDATA[select e from Attendance e order by e.event.startDate asc]]>
+                </query>
+            </loader>
+        </collection>
+        <collection id="usersDc" class="com.company.classmanagment.entity.User">
+            <fetchPlan extends="_instance_name">
+                <property name="semester"/>
+                <property name="studentAttendanceScore"/>
+                <property name="needActivation"/>
+                <property name="activationToken"/>
+            </fetchPlan>
+            <loader id="usersDl">
+                <query>
+                    <![CDATA[select e from User e where e.student = :student]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="lookupSelectAction"
+                caption="msg:///actions.Select"
+                icon="LOOKUP_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="lookupCancelAction"
+                caption="msg:///actions.Cancel"
+                icon="LOOKUP_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="attendanceSheet" spacing="true">
+        <tabSheet id="attendanceSheet" height="100%">
+            <tab caption="Tab1" id="singleSelect" spacing="true" expand="attendancesTable">
+                <filter id="filter"
+                        dataLoader="attendancesDl" >
+                    <properties include=".*"/>
+                </filter>
+                <groupTable id="attendancesTable"
+                            width="100%"
+                            dataContainer="attendancesDc">
+                    <actions>
+                        <action id="create" type="create"/>
+                        <action id="edit" type="edit"/>
+                        <action id="refresh" type="refresh"/>
+                        <action id="remove" type="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="event.startDate"/>
+                        <column id="user"/>
+                        <column id="event"/>
+                        <column id="earnedScore"/>
+                        <column id="late"/>
+                    </columns>
+                    <simplePagination/>
+                    <buttonsPanel id="buttonsPanel"
+                                  alwaysVisible="true">
+                        <button id="createBtn" action="attendancesTable.create"/>
+                        <button id="editBtn" action="attendancesTable.edit"/>
+                        <button id="refreshBtn" action="attendancesTable.refresh"/>
+                        <button id="removeBtn" action="attendancesTable.remove"/>
+                    </buttonsPanel>
+                </groupTable>
+                <hbox id="lookupActions" spacing="true" visible="false">
+                    <button action="lookupSelectAction"/>
+                    <button action="lookupCancelAction"/>
+                </hbox>
+            </tab>
+
+            <tab caption="Tab2" id="tab_2" spacing="true" expand="usersTable">
+                <filter id="userFilter"
+                        dataLoader="usersDl" >
+                    <properties include=".*"/>
+                </filter>
+                <groupTable id="usersTable" width="100%" dataContainer="usersDc" multiselect="true">
+                    <actions>
+                        <action id="createAttendance" type="itemTracking" caption="Create Attendance"/>
+                        <action id="refresh" type="refresh"/>
+                    </actions>
+                    <buttonsPanel alwaysVisible="true">
+                        <button id="createAttendanceBtn" action="usersTable.createAttendance"/>
+                        <button id="usersTableRefreshBtn" action="usersTable.refresh"/>
+                    </buttonsPanel>
+                    <columns>
+                        <column id="username"/>
+                        <column id="firstName"/>
+                        <column id="lastName"/>
+                        <column id="semester"/>
+                        <column id="studentAttendanceScore"/>
+                    </columns>
+                </groupTable>
+
+            </tab>
+        </tabSheet>
+
+
+    </layout>
+</window>

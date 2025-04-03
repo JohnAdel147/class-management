@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://workingDaysEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="workingDaysDc"
+                  class="com.company.classmanagment.entity.WorkingDays">
+            <fetchPlan extends="_base"/>
+            <loader/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true" expand="editActions">
+        <form id="form" dataContainer="workingDaysDc">
+            <column width="350px">
+                <textField id="nameField" property="name"/>
+                <textArea id="descriptionField" property="description" rows="5"/>
+                <dateField id="startDateField" property="startDate"/>
+                <dateField id="endDateField" property="endDate"/>
+                <textField id="attendanceScoreField" property="attendanceScore"/>
+                <checkBox id="grade_1Field" property="grade_1"/>
+                <checkBox id="grade_2Field" property="grade_2"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>
