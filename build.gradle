@@ -35,9 +35,9 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
-//    runtimeOnly 'org.hsqldb:hsqldb'
+    runtimeOnly 'org.hsqldb:hsqldb'
 
-    runtimeOnly 'mysql:mysql-connector-java:8.0.33'
+//    runtimeOnly 'mysql:mysql-connector-java:8.0.33'
 
 
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
